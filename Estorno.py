@@ -15,8 +15,8 @@ class Estorno:
         data = {
             "valor": valor
         }
-        
-        res = requests.put(f"https://pix.qqpag.com.br/api/v2/pix/{end_to_end}/devolucao/30507", headers=header, json=data, verify=False)
+        url = f"https:suaurl/{end_to_end}/suaurl"
+        res = requests.put(url, headers=header, json=data, verify=False)
         response = res.json()
 
         return response
@@ -26,7 +26,8 @@ class Estorno:
 
             "Authorization": f"Bearer {self.token}"
         }
-        res = requests.get(f"https://pix.qqpag.com.br/api/v1/cob/{txid}", headers=header, verify=False)
+        url = f"https:suaurl/{txid}/suaurl"
+        res = requests.get(url, headers=header, verify=False)
         response = res.json()
 
         if "pix" in response and len(response["pix"]) > 0:
