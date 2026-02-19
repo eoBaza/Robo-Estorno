@@ -1,5 +1,5 @@
 import requests
-from Script_Estorno.Pix import Token
+from Pix import Token
 import json
 import certifi
 class Estorno:
@@ -16,7 +16,7 @@ class Estorno:
             "valor": valor
         }
         url = f"https:suaurl/{end_to_end}/suaurl"
-        res = requests.put(url, headers=header, json=data, verify=False)
+        res = requests.put(url, headers=header, json=data, verify=True)
         response = res.json()
 
         return response
@@ -27,7 +27,7 @@ class Estorno:
             "Authorization": f"Bearer {self.token}"
         }
         url = f"https:suaurl/{txid}/suaurl"
-        res = requests.get(url, headers=header, verify=False)
+        res = requests.get(url, headers=header, verify=True)
         response = res.json()
 
         if "pix" in response and len(response["pix"]) > 0:

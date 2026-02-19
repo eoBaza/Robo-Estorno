@@ -16,7 +16,7 @@ class Token:
             "scope": ""
         }
         url = f"suaurl/api/oauth/token"
-        r = requests.post(url, data=payload,verify=False)
+        r = requests.post(url, data=payload,verify=True)
         obj = json.loads(r.text)
         self.token = obj["access_token"]
         return self.token
@@ -27,7 +27,7 @@ class Token:
         }
         url = f"suaurl/{self.txid}"
         print(f"🔍 Chamando API do Pix: {url}")
-        res = requests.get(url, headers=header, verify=False)
+        res = requests.get(url, headers=header, verify=True)
         response = res.json()
 
         if "pix" in response and len(response["pix"]) >0:

@@ -16,14 +16,14 @@ class ExtrairTXID:
 
     @staticmethod
     def extrair_cupom(txid, filial):
-        if len(filial) == 3:
+        filial_str = str(filial)
+        if len(filial_str) == 3:
             return txid[15:21]
-        elif len(filial) == 2:
+        elif len(filial_str) == 2:
             return txid[16:22]
-        elif len(filial) == 1:
+        elif len(filial_str) == 1:
             return txid[18:23]
-        else:
-            return None
+        return None
 
     def validacao_cupom(self, txid, filial):
         self.txid = txid
@@ -91,10 +91,10 @@ class ExtrairTXID:
                 nsu = result[0][1]
 
                 if data_fim:
-                    print(f"""====== RESPOSTA FINAL DO ROBO=============\nFoi verificado que os Saques-Pix foram efetuados e Recebidos na conta da Quero-Quero, e os cupons finalizaram:\nTXID: {self.txid}\nNSU: {nsu}\nValor: R${valor}
+                    print(f"""====== RESPOSTA FINAL DO ROBO=============\nFoi verificado que os Saques-Pix foram efetuados e Recebidos na conta da loja, e os cupons finalizaram:\nTXID: {self.txid}\nNSU: {nsu}\nValor: R${valor}
                         """)
                 else:
-                    print(f"""====== RESPOSTA FINAL DO ROBO=============\nFoi verificado que o Saque-Pix foi efetuado e Recebido na conta da Quero-Quero, porém não finalizou o Cupom no PDV. Favor validar se será necessário o estorno do valor.\nTXID: {self.txid}\nNSU: {nsu}\nValor: R${valor}""")
+                    print(f"""====== RESPOSTA FINAL DO ROBO=============\nFoi verificado que o Saque-Pix foi efetuado e Recebido na conta da loja, porém não finalizou o Cupom no PDV. Favor validar se será necessário o estorno do valor.\nTXID: {self.txid}\nNSU: {nsu}\nValor: R${valor}""")
 
                 return {
                     "valor": valor,
@@ -126,7 +126,7 @@ class ExtrairTXID:
                         else:
                             nsu = "NAO ENCONTRADO NA API"
                         print(f"Esta finalizado na cupom: {result_cupom[0]}")
-                        print(f"""====== RESPOSTA FINAL DO ROBO=============\nFoi verificado que o Saque-Pix foi efetuado e Recebido na conta da Quero-Quero, porém não finalizou o Cupom no PDV. Favor validar se será necessário o estorno do valor.\nTXID: {self.txid}\nNSU: {nsu}\nValor: {valor_pagamentopix}""")
+                        print(f"""====== RESPOSTA FINAL DO ROBO=============\nFoi verificado que o Saque-Pix foi efetuado e Recebido na conta da loja, porém não finalizou o Cupom no PDV. Favor validar se será necessário o estorno do valor.\nTXID: {self.txid}\nNSU: {nsu}\nValor: {valor_pagamentopix}""")
                         return {
                             "valor": valor_pagamentopix,
                             "nsu": nsu,
